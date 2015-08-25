@@ -1376,8 +1376,8 @@ struct task_struct {
 
 	struct restart_block restart_block;
 
-	pid_t pid;
-	pid_t tgid;
+	pid_t pid; /* 全局PID */
+	pid_t tgid; /* 线程组ID */
 
 #ifdef CONFIG_CC_STACKPROTECTOR
 	/* Canary value for the -fstack-protector gcc feature */
@@ -1405,7 +1405,7 @@ struct task_struct {
 	struct list_head ptraced;
 	struct list_head ptrace_entry;
 
-	/* PID/PID hash table linkage. */
+	/* PID/PID hash table linkage. 进程与进程散列表的联系 */
 	struct pid_link pids[PIDTYPE_MAX];
 	struct list_head thread_group;
 	struct list_head thread_node;

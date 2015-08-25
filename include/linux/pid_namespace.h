@@ -27,10 +27,10 @@ struct pid_namespace {
 	struct rcu_head rcu;
 	int last_pid;
 	unsigned int nr_hashed;
-	struct task_struct *child_reaper;
+	struct task_struct *child_reaper; /* 相当于全局的init进程，用于处理孤独进程 */
 	struct kmem_cache *pid_cachep;
-	unsigned int level;
-	struct pid_namespace *parent;
+	unsigned int level; /* 当前命名空间在命名空间层次中结构中的深度 */
+	struct pid_namespace *parent; /* 指向父命名空间 */
 #ifdef CONFIG_PROC_FS
 	struct vfsmount *proc_mnt;
 	struct dentry *proc_self;

@@ -910,6 +910,7 @@ static inline int __normal_prio(struct task_struct *p)
  * boosted by interactivity modifiers. Changes upon fork,
  * setprio syscalls, and whenever the interactivity
  * estimator recalculates.
+ * 普通优先级的计算方法
  */
 static inline int normal_prio(struct task_struct *p)
 {
@@ -938,6 +939,8 @@ static int effective_prio(struct task_struct *p)
 	 * If we are RT tasks or we were boosted to RT priority,
 	 * keep the priority unchanged. Otherwise, update priority
 	 * to the normal priority:
+     * 如果是实时进程或已经提高实时优先级，则保持优先级不变。
+     * 否则，返回普通优先级
 	 */
 	if (!rt_prio(p->prio))
 		return p->normal_prio;

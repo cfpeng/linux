@@ -502,6 +502,9 @@ pid_t pid_nr_ns(struct pid *pid, struct pid_namespace *ns)
 	struct upid *upid;
 	pid_t nr = 0;
 
+    /* 
+     * 父命名空间可以看到子命名空间的PID，反过来却不行 
+     */
 	if (pid && ns->level <= pid->level) {
 		upid = &pid->numbers[ns->level];
 		if (upid->ns == ns)
@@ -511,6 +514,9 @@ pid_t pid_nr_ns(struct pid *pid, struct pid_namespace *ns)
 }
 EXPORT_SYMBOL_GPL(pid_nr_ns);
 
+/*
+ * the id seen from the pid namesapce of current
+ */
 pid_t pid_vnr(struct pid *pid)
 {
 	return pid_nr_ns(pid, task_active_pid_ns(current));

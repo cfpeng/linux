@@ -61,8 +61,10 @@ enum kobject_action {
 };
 
 struct kobject {
+    // 对象的文本名称，可利用 sysfs 导出到用户空间
 	const char		*name;
 	struct list_head	entry;
+    // 父对象指针
 	struct kobject		*parent;
 	struct kset		*kset;
 	struct kobj_type	*ktype;

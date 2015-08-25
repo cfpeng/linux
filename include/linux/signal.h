@@ -39,6 +39,7 @@ struct sigpending {
    be atomic.  */
 static inline void sigaddset(sigset_t *set, int _sig)
 {
+    /* 得到信号的位编号数 */
 	unsigned long sig = _sig - 1;
 	if (_NSIG_WORDS == 1)
 		set->sig[0] |= 1UL << sig;
